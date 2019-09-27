@@ -32,7 +32,7 @@ export class SendComponent implements OnInit {
   addressBookMatch = '';
 
   amounts = [
-    { name: 'NANO (1 Mnano)', shortName: 'NANO', value: 'mnano' },
+    { name: 'XRBC (1 Mnano)', shortName: 'XRBC', value: 'mnano' },
     { name: 'knano (0.001 Mnano)', shortName: 'knano', value: 'knano' },
     { name: 'nano (0.000001 Mnano)', shortName: 'nano', value: 'nano' },
   ];
@@ -188,7 +188,7 @@ export class SendComponent implements OnInit {
 
     if (this.amount < 0 || rawAmount.lessThan(0)) return this.notificationService.sendWarning(`Amount is invalid`);
     if (nanoAmount.lessThan(1)) return this.notificationService.sendWarning(`Transactions for less than 1 nano will be ignored by the node.  Send raw amounts with at least 1 nano.`);
-    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notificationService.sendError(`From account does not have enough NANO`);
+    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notificationService.sendError(`From account does not have enough XRBC`);
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
     this.amountRaw = this.rawAmount.mod(this.nano);

@@ -25,9 +25,9 @@ export class ConfigureWalletComponent implements OnInit {
 
   selectedImportOption = 'seed';
   importOptions = [
-    { name: 'Nano Seed', value: 'seed' },
-    { name: 'Nano Mnemonic Phrase', value: 'mnemonic' },
-    { name: 'NanoVault Wallet File', value: 'file' },
+    { name: 'XRBC Seed', value: 'seed' },
+    { name: 'XRBC Mnemonic Phrase', value: 'mnemonic' },
+    { name: 'RaiVault Wallet File', value: 'file' },
     { name: 'Ledger Nano S', value: 'ledger' },
   ];
 
@@ -97,7 +97,7 @@ export class ConfigureWalletComponent implements OnInit {
     }
 
     if (this.ledger.status === LedgerStatus.LOCKED) {
-      return this.notifications.sendWarning(`Unlock your ledger device and open the Nano app to continue`);
+      return this.notifications.sendWarning(`Unlock your ledger device and open the XRBC app to continue`);
     }
 
     if (refreshOnly) {
@@ -129,10 +129,10 @@ export class ConfigureWalletComponent implements OnInit {
 
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;"><span style="font-size: 18px;">You are about to create a new wallet<br>which will <b>overwrite your existing wallet</b></span><br><br><b style="font-size: 18px;">Be sure you have saved your current Nano seed before continuing</b><br><br>Without it - <b>ALL FUNDS WILL BE UNRECOVERABLE</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;"><span style="font-size: 18px;">You are about to create a new wallet<br>which will <b>overwrite your existing wallet</b></span><br><br><b style="font-size: 18px;">Be sure you have saved your current XRBC seed before continuing</b><br><br>Without it - <b>ALL FUNDS WILL BE UNRECOVERABLE</b></p>');
       return true;
     } catch (err) {
-      this.notifications.sendInfo(`Use the 'Manage Wallet' page to back up your Nano seed before continuing!`);
+      this.notifications.sendInfo(`Use the 'Manage Wallet' page to back up your XRBC seed before continuing!`);
       return false;
     }
   }

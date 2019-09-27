@@ -10,7 +10,7 @@ interface AddressBookEntry {
 
 @Injectable()
 export class AddressBookService {
-  storeKey = `nanovault-addressbook`;
+  storeKey = `raivault-addressbook`;
 
   addressBook: AddressBookEntry[] = [];
 
@@ -37,8 +37,8 @@ export class AddressBookService {
     const addressBook = JSON.parse(addressBookStore);
 
     const newAddressBook = addressBook.map(entry => {
-      if (entry.account.indexOf('xrb_') !== -1) {
-        entry.account = entry.account.replace('xrb_', 'nano_');
+      if (entry.account.indexOf('xrbc_') !== -1) {
+        entry.account = entry.account.replace('xrbc_', 'xrbc_');
       }
       return entry;
     });

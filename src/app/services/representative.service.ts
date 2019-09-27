@@ -44,7 +44,7 @@ export interface FullRepresentativeOverview extends RepresentativeApiOverview {
 
 @Injectable()
 export class RepresentativeService {
-  storeKey = `nanovault-representatives`;
+  storeKey = `raivault-representatives`;
 
   representatives$ = new BehaviorSubject([]);
   representatives = [];
@@ -249,8 +249,8 @@ export class RepresentativeService {
     const list = JSON.parse(representativeStore);
 
     const newRepList = list.map(entry => {
-      if (entry.id.indexOf('xrb_') !== -1) {
-        entry.id = entry.id.replace('xrb_', 'nano_');
+      if (entry.id.indexOf('xrbc_') !== -1) {
+        entry.id = entry.id.replace('xrbc_', 'xrbc_');
       }
       return entry;
     });
@@ -324,7 +324,7 @@ export class RepresentativeService {
   defaultRepresentatives = [
     {
       id: 'xrb_3rw4un6ys57hrb39sy1qx8qy5wukst1iiponztrz9qiz6qqa55kxzx4491or',
-      name: 'NanoVault Rep',
+      name: 'RaiVault Rep',
       trusted: true,
     },
     {

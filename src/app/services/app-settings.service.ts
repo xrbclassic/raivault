@@ -23,18 +23,18 @@ interface AppSettings {
 
 @Injectable()
 export class AppSettingsService {
-  storeKey = `nanovault-appsettings`;
+  storeKey = `raivault-appsettings`;
 
   settings: AppSettings = {
     displayDenomination: 'mnano',
-    // displayPrefix: 'xrb',
+    // displayPrefix: 'xrbc',
     walletStore: 'localStorage',
     displayCurrency: 'USD',
     defaultRepresentative: null,
     lockOnClose: 1,
     lockInactivityMinutes: 30,
     powSource: 'best',
-    serverName: 'nanovault',
+    serverName: 'raivault',
     serverAPI: null,
     serverNode: null,
     serverWS: null,
@@ -81,14 +81,14 @@ export class AppSettingsService {
     localStorage.removeItem(this.storeKey);
     this.settings = {
       displayDenomination: 'mnano',
-      // displayPrefix: 'xrb',
+      // displayPrefix: 'xrbc',
       walletStore: 'localStorage',
       displayCurrency: 'USD',
       defaultRepresentative: null,
       lockOnClose: 1,
       lockInactivityMinutes: 30,
       powSource: 'best',
-      serverName: 'nanovault',
+      serverName: 'raivault',
       serverNode: null,
       serverAPI: null,
       serverWS: null,

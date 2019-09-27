@@ -24,9 +24,9 @@ export class ConfigureAppComponent implements OnInit {
   wallet = this.walletService.wallet;
 
   denominations = [
-    { name: 'NANO (1 Mnano)', value: 'mnano' },
-    { name: 'knano (0.001 Mnano)', value: 'knano' },
-    { name: 'nano (0.000001 Mnano)', value: 'nano' },
+    { name: 'XRBC (1 Mxrbc)', value: 'mnano' },
+    { name: 'kxrbc (0.001 Mxrbc)', value: 'knano' },
+    { name: 'xrbc (0.000001 Mxrbc)', value: 'nano' },
   ];
   selectedDenomination = this.denominations[0].value;
 
@@ -89,20 +89,18 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'Best Option Available', value: 'best' },
     { name: 'Client Side - WebGL [Recommended] (Chrome/Firefox)', value: 'clientWebGL' },
     { name: 'Client Side - CPU', value: 'clientCPU' },
-    { name: 'Server - NanoVault Server', value: 'server' },
+    { name: 'Server - RaiVault Server', value: 'server' },
   ];
   selectedPoWOption = this.powOptions[0].value;
 
-  // prefixOptions = [
-  //   { name: 'xrb_', value: 'xrb' },
+   prefixOptions = [
+     { name: 'xrbc_', value: 'xrbc' },
   //   { name: 'nano_', value: 'nano' },
-  // ];
-  // selectedPrefix = this.prefixOptions[0].value;
+   ];
+   selectedPrefix = this.prefixOptions[0].value;
 
   serverOptions = [
-    { name: 'NanoVault Default', value: 'nanovault' },
-    { name: 'NanoCrawler', value: 'nanocrawler' },
-    { name: 'My Nano Ninja', value: 'mynano' },
+    { name: 'RaiVault Default', value: 'raivault' },
     { name: 'Custom', value: 'custom' },
   ];
   selectedServer = this.serverOptions[0].value;
@@ -114,18 +112,8 @@ export class ConfigureAppComponent implements OnInit {
 
   serverConfigurations = [
     {
-      name: 'nanovault',
+      name: 'raivault',
       api: null,
-      ws: null,
-    },
-    {
-      name: 'nanocrawler',
-      api: 'https://vault.nanocrawler.cc/api/node-api',
-      ws: 'wss://ws.nanocrawler.cc',
-    },
-    {
-      name: 'mynano',
-      api: 'https://vault-api.mynano.ninja/api/node-api',
       ws: null,
     },
   ];
@@ -275,7 +263,7 @@ export class ConfigureAppComponent implements OnInit {
       if (this.serverAPI.startsWith('https://') || this.serverAPI.startsWith('http://')) {
         newSettings.serverAPI = this.serverAPI;
       } else {
-        return this.notifications.sendWarning(`Custom API Server has an invalid address.  Make sure to use the full address ie: https://nanovault.io/api/node-api`);
+        return this.notifications.sendWarning(`Custom API Server has an invalid address.  Make sure to use the full address ie: https://wallet.xrbclassic.com/api/node-api`);
       }
     }
 
@@ -283,7 +271,7 @@ export class ConfigureAppComponent implements OnInit {
       if (this.serverNode.startsWith('https://') || this.serverNode.startsWith('http://')) {
         newSettings.serverNode = this.serverNode;
       } else {
-        return this.notifications.sendWarning(`Custom Node Server has an invalid address.  Make sure to use the full address ie: http://127.0.0.1:7076`);
+        return this.notifications.sendWarning(`Custom Node Server has an invalid address.  Make sure to use the full address ie: http://127.0.0.1:7002`);
       }
     }
 
@@ -291,7 +279,7 @@ export class ConfigureAppComponent implements OnInit {
       if (this.serverWS.startsWith('wss://') || this.serverWS.startsWith('ws://')) {
         newSettings.serverWS = this.serverWS;
       } else {
-        return this.notifications.sendWarning(`Custom Update Server has an invalid address.  Make sure to use the full address ie: wss://ws.nanovault.io/`);
+        return this.notifications.sendWarning(`Custom Update Server has an invalid address.  Make sure to use the full address ie: wss://ws.xrbclassic.com/`);
       }
     }
 
@@ -358,7 +346,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearWalletData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in NanoVault!<br><b>Make sure you have your seed backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in RaiVault!<br><b>Make sure you have your seed backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
@@ -369,7 +357,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearAllData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete ALL of your data stored in NanoVault.<br>This includes all of your wallet data, your address book, and your application settings!<br><br><b>Make sure you have your seed backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete ALL of your data stored in RaiVault.<br>This includes all of your wallet data, your address book, and your application settings!<br><br><b>Make sure you have your seed backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 

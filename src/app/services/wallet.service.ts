@@ -66,7 +66,7 @@ export interface WalletApiAccount extends BaseApiAccount {
 @Injectable()
 export class WalletService {
   nano = 1000000000000000000000000;
-  storeKey = `nanovault-wallet`;
+  storeKey = `raivault-wallet`;
 
   wallet: FullWallet = {
     type: 'seed',
@@ -193,8 +193,8 @@ export class WalletService {
 
     if (walletJson.accounts) {
       const newAccounts = walletJson.accounts.map(account => {
-        if (account.id.indexOf('xrb_') !== -1) {
-          account.id = account.id.replace('xrb_', 'nano_');
+        if (account.id.indexOf('xrbc_') !== -1) {
+          account.id = account.id.replace('xrbc_', 'xrbc_');
         }
         return account;
       });
@@ -300,7 +300,7 @@ export class WalletService {
     const exportData = this.generateExportData();
     const base64Data = btoa(JSON.stringify(exportData));
 
-    return `https://nanovault.io/import-wallet#${base64Data}`;
+    return `https://wallet.xrbclassic.com/import-wallet#${base64Data}`;
   }
 
   lockWallet() {
@@ -446,7 +446,7 @@ export class WalletService {
     const account: any = await this.ledgerService.getLedgerAccount(index);
 
     const accountID = account.address;
-    const nanoAccountID = accountID.replace('xrb_', 'nano_');
+    const nanoAccountID = accountID.replace('xrbc_', 'xrbc_');
     const addressBookName = this.addressBook.getAccountName(nanoAccountID);
 
     const newAccount: WalletAccount = {
@@ -798,7 +798,7 @@ export class WalletService {
       this.successfulBlocks.push(nextBlock.hash);
 
       const receiveAmount = this.util.nano.rawToMnano(nextBlock.amount);
-      this.notifications.sendSuccess(`Successfully received ${receiveAmount.isZero() ? '' : receiveAmount.toFixed(6)} Nano!`);
+      this.notifications.sendSuccess(`Successfully received ${receiveAmount.isZero() ? '' : receiveAmount.toFixed(6)} XRBC!`);
 
       // await this.promiseSleep(500); // Give the node a chance to make sure its ready to reload all?
       await this.reloadBalances();

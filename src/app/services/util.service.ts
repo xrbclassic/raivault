@@ -206,7 +206,7 @@ function generateAccountKeyPair(accountSecretKeyBytes) {
   return nacl.sign.keyPair.fromSecretKey(accountSecretKeyBytes);
 }
 
-function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
+function getPublicAccountID(accountPublicKeyBytes, prefix = 'xrbc') {
   const accountHex = util.uint8.toHex(accountPublicKeyBytes);
   const keyBytes = util.uint4.toUint8(util.hex.toUint4(accountHex)); // For some reason here we go from u, to hex, to 4, to 8??
   const checksum = util.uint5.toString(util.uint4.toUint5(util.uint8.toUint4(blake.blake2b(keyBytes, null, 5).reverse())));
@@ -216,20 +216,19 @@ function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
 }
 
 function getAccountPublicKey(account) {
-  if (account.length == 64) {
-    if(!account.startsWith('xrb_1') && !account.startsWith('xrb_3')) {
-      throw new Error(`Invalid NANO Account`);
+  if (account.length == 65) {
+    if(!account.startsWith('xrbc_1') && !account.startsWith('xrbc_3')) {
+      throw new Error(`Invalid XRBC Account`);
     }
-  } else if (account.length == 65) {
-    if(!account.startsWith('nano_1') && !account.startsWith('nano_3')) {
-      throw new Error(`Invalid NANO Account`);
+    else if(!account.startsWith('xrbc_1') && !account.startsWith('xrbc_3')) {
+      throw new Error(`Invalid XRBC1 Account`);
     }
   } else {
-    throw new Error(`Invalid NANO Account`);
+    throw new Error(`Invalid XRBC2 Account`);
   }
-  const account_crop = account.length == 64 ? account.substring(4,64) : account.substring(5,65);
+  const account_crop = account.length == 65 ? account.substring(5,65) : account.substring(5,65);
   const isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop);
-  if (!isValid) throw new Error(`Invalid NANO account`);
+  if (!isValid) throw new Error(`Invalid XRBC account`);
 
   const key_uint4 = array_crop(uint5ToUint4(stringToUint5(account_crop.substring(0, 52))));
   const hash_uint4 = uint5ToUint4(stringToUint5(account_crop.substring(52, 60)));
@@ -241,11 +240,11 @@ function getAccountPublicKey(account) {
   return uint4ToHex(key_uint4);
 }
 
-function setPrefix(account, prefix = 'xrb') {
-  if (prefix === 'nano') {
-    return account.replace('xrb_', 'nano_');
+function setPrefix(account, prefix = 'xrbc') {
+  if (prefix === 'xrbc') {
+    return account.replace('xrbc_', 'xrbc_');
   } else {
-    return account.replace('nano_', 'xrb_');
+    return account.replace('xrbc_', 'xrbc_');
   }
 }
 
