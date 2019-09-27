@@ -1,10 +1,10 @@
 .body {
-  background: #000;
+  background: #faffff;
 }
 
 .app {
   font-family: 'Lato', sans-serif;
-  background: #f0f1f1;
+  background: #faffff;
   /*height: 100%;*/
 }
 
@@ -38,15 +38,16 @@
 }
 
 .left-nav .active {
-  color: #49b749;
+  color: #FFF;
+  font-weight:bold;
 }
 
 .left-nav a {
-  color: #FFF;
+  color: #d6e4e4;
 }
 
 .left-nav a:hover {
-  color: #49b749;
+  color: #FFF;
 }
 
 .wallet-bar a {
